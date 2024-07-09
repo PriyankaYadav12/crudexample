@@ -29,10 +29,15 @@ steps:
   displayName: 'Run Tests'
 
 - stage: Deploy
+  displayName: 'Deploy Stage'
   dependsOn: BuildAndTest  # Corrected to depend on the correct stage
-  jobs:
-  - job: Deploy
-    displayName: 'Deploy'
-    steps:
-    - script: echo 'Deploying to environment...'
-      displayName: 'Deploy Step'
+jobs:
+  - deployment: DeployJob
+    displayName: 'Deploy Job'
+    environment: 'YourEnvironmentName'  # Replace with your environment name
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - script: echo 'Deploying to environment...'
+            displayName: 'Deploy Step'
