@@ -3,41 +3,36 @@ trigger:
 - main  # Adjust this to the branch you want to trigger the pipeline
 
 pool:
-  name: 'Default'  # Replace 'Default' with the name of your self-hosted agent pool
+  vmImage: 'ubuntu-latest'
 
-stages:
-- stage: BuildAndTest
-  jobs:
-  - job: CheckoutAndTest
-    displayName: 'Checkout and Test'
-    steps:
-    - checkout: self
-      displayName: 'Checkout Code'
+steps:
+- checkout: self
+  displayName: 'Checkout Code'
 
-    - task: UsePythonVersion@0
-      inputs:
-        versionSpec: '3.x'  # Specify the Python version, e.g., '3.8'
-        addToPath: true
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.8.x'  # Adjust with a specific version that matches your needs
+    addToPath: true
 
-    - script: python -m venv venv
-      displayName: 'Create Virtual Environment'
+- script: python -m venv venv
+  displayName: 'Create Virtual Environment'
 
-    - script: |
-        source venv/bin/activate
-        pip install --upgrade pip
-        pip install -r requirements.txt
-      displayName: 'Install Dependencies'
+- script: |
+    source venv/bin/activate
+    pip install --upgrade pip
+    pip install -r requirements.txt
+  displayName: 'Install Dependencies'
 
-    - script: |
-        source venv/bin/activate
-        pytest
-      displayName: 'Run Tests'
+- script: |
+    source venv/bin/activate
+    pytest
+  displayName: 'Run Tests'
 
-- stage: Deploy
-  dependsOn: BuildAndTest
-  jobs:
-  - job: Deploy
-    displayName: 'Deploy'
-    steps:
-    - script: echo 'Deploying to environment...'
-      displayName: 'Deploy Step'
+# - stage: Deploy
+#   dependsOn: BuildAndTest
+#   jobs:
+#   - job: Deploy
+#     displayName: 'Deploy'
+#     steps:
+#     - script: echo 'Deploying to environment...'
+#       displayName: 'Deploy Step'
