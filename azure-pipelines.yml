@@ -3,7 +3,7 @@ trigger:
 - main  # Adjust this to the branch you want to trigger the pipeline
 
 pool:
-  vmImage: 'Default'
+  vmImage: 'ubuntu-latest'
 
 steps:
 - checkout: self
@@ -29,7 +29,7 @@ steps:
   displayName: 'Run Tests'
 
 - stage: Deploy
-  dependsOn: Build
+  dependsOn: BuildAndTest  # Corrected to depend on the correct stage
   jobs:
   - job: Deploy
     displayName: 'Deploy'
