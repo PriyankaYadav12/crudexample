@@ -79,7 +79,7 @@ steps:
 
 - script: |
     source venv/bin/activate
-    pytest path/to/tests
+    pytest 
   displayName: 'Run Tests'
 
 - script: |
