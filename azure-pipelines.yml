@@ -3,7 +3,8 @@ trigger:
 - main  # Adjust this to the branch you want to trigger the pipeline
 
 pool:
-  vmImage: 'Default'
+  name: 'Default'  # Make sure this matches the correct agent pool name
+  vmImage: 'ubuntu-latest'  # Specify the correct VM image
 
 steps:
 - checkout: self
@@ -11,7 +12,7 @@ steps:
 
 - task: UsePythonVersion@0
   inputs:
-    versionSpec: '3.8.x'  # Adjust with a specific version that matches your needs
+    versionSpec: '3.8.x'  # Specify the Python version, e.g., '3.8'
     addToPath: true
 
 - script: python -m venv venv
