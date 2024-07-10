@@ -73,6 +73,7 @@ steps:
     python -m venv venv
     source venv/bin/activate
     pip install --upgrade pip
+    pip install pytest
     pip install -r requirements.txt
   displayName: 'Install Dependencies and Verify Python Environment'
 
