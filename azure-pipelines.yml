@@ -3,7 +3,8 @@ trigger:
 - main  # Adjust this to the branch you want to trigger the pipeline
 
 pool:
-  name: 'Default'
+  name: '
+Crudexampleagentpool'
   vmImage: 'ubuntu-latest'  # Use Ubuntu to avoid Windows-specific issues
 
 steps:
