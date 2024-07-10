@@ -3,7 +3,7 @@ trigger:
 - main  # Adjust this to the branch you want to trigger the pipeline
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'Default'
 
 steps:
 - checkout: self
