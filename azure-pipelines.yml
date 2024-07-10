@@ -3,6 +3,7 @@ trigger:
 - main  # Adjust this to the branch you want to trigger the pipeline
 
 pool:
+  name: 'Default'
   vmImage: 'ubuntu-latest'  # Use Ubuntu to avoid Windows-specific issues
 
 steps:
@@ -14,8 +15,7 @@ steps:
     versionSpec: '3.8'  # Specify a specific Python version, e.g., '3.8'
     addToPath: true
 
-- script: |
-    python -m venv venv
+- script: python -m venv venv
   displayName: 'Create Virtual Environment'
 
 - script: |
@@ -30,10 +30,18 @@ steps:
   displayName: 'Run Tests'
 
 # - stage: Deploy
-#   dependsOn: []
+#   dependsOn: []  # No dependencies in this simplified example
 #   jobs:
 #   - job: Deploy
-#     displayName: 'Deploy'
+#     displayName: 'Deploy Job'
+#     pool:
+#       name: 'Default'
+#       vmImage: 'ubuntu-latest'  # Ensure the deployment job uses the same pool
 #     steps:
 #     - script: echo 'Deploying to environment...'
 #       displayName: 'Deploy Step'
+
+    # Example of using a task in the deployment stage
+    # - task: SomeAzureTask@1  # Replace with a real task
+    #   inputs:
+    #     someInput: someValue
