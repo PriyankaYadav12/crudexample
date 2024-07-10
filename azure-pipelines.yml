@@ -13,7 +13,7 @@ steps:
 
 - task: UsePythonVersion@0
   inputs:
-    versionSpec: '3.12.4'  # Specify a specific Python version, e.g., '3.8'
+    versionSpec: '3.8'  # Specify a specific Python version, e.g., '3.8'
     addToPath: true
 
 - script: python -m venv venv
