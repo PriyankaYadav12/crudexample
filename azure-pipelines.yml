@@ -3,8 +3,8 @@ trigger:
 - main  # Adjust this to the branch you want to trigger the pipeline
 
 pool:
-  name: 'Default'  # Make sure this matches the correct agent pool name
-  vmImage: 'ubuntu-latest'  # Specify the correct VM image
+  name: 'Default'
+  vmImage: 'ubuntu-latest'  # Using Ubuntu to avoid Windows-specific paths
 
 steps:
 - checkout: self
@@ -12,7 +12,7 @@ steps:
 
 - task: UsePythonVersion@0
   inputs:
-    versionSpec: '3.8.x'  # Specify the Python version, e.g., '3.8'
+    versionSpec: '3.8'  # Specify a specific Python version, e.g., '3.8'
     addToPath: true
 
 - script: python -m venv venv
@@ -30,7 +30,7 @@ steps:
   displayName: 'Run Tests'
 
 # - stage: Deploy
-#   dependsOn: BuildAndTest
+#   dependsOn: []  # No dependencies in this simplified example
 #   jobs:
 #   - job: Deploy
 #     displayName: 'Deploy'
