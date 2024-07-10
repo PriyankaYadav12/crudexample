@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_USER: root
+      MYSQL_DATABASE: djangodb
+      MYSQL_ROOT_PASSWORD: Root@123
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  backend:
+    build: .
+    command: >
+      sh -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mysql
+    environment:
+      MYSQL_NAME: djangodb
+      MYSQL_USER: root
+      MYSQL_PASSWORD: Root@123
+      MYSQL_HOST: localhost
+
+volumes:
+  mysql_data:
